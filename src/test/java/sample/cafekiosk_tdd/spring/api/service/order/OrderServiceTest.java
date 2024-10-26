@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import sample.cafekiosk_tdd.spring.api.controller.order.request.OrderCreateRequest;
 import sample.cafekiosk_tdd.spring.api.service.order.response.OrderResponse;
 import sample.cafekiosk_tdd.spring.domain.order.OrderRepository;
@@ -18,6 +19,7 @@ import sample.cafekiosk_tdd.spring.domain.product.Product;
 import sample.cafekiosk_tdd.spring.domain.product.ProductRepository;
 import sample.cafekiosk_tdd.spring.domain.product.ProductType;
 
+@ActiveProfiles("test")
 @SpringBootTest
 class OrderServiceTest {
     @Autowired
@@ -37,12 +39,12 @@ class OrderServiceTest {
         productRepository.saveAll(List.of(product1, product2, product3));
         List<String> productNumbers = List.of("001", "002");
         OrderCreateRequest request = OrderCreateRequest.builder()
-                                    .productNumbers(List.of("001", "002"))
+                                    .productNumbers(productNumbers)
                                     .build();
         LocalDateTime registeredDateTime = LocalDateTime.now();
 
         //when
-        OrderResponse orderResponse = orderService.createOrder(request);
+        OrderResponse orderResponse = orderService.createOrder(request, registeredDateTime);
 
         //then
         assertThat(orderResponse.getId()).isNotNull();

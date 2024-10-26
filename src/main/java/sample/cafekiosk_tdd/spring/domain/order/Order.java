@@ -48,13 +48,13 @@ public class Order {
                 .collect(Collectors.toList());
     }
 
+    public static Order create(List<Product> products, LocalDateTime registeredDateTime) {
+        return new Order(products, registeredDateTime);
+    }
+
     private int calculateTotalPrice(List<Product> products) {
         return products.stream()
                 .mapToInt(Product::getPrice)
                 .sum();
-    }
-
-    public static Order create(List<Product> products, LocalDateTime registeredDateTime) {
-        return new Order(products, registeredDateTime);
     }
 }
