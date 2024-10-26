@@ -98,6 +98,7 @@ class CafekioskTest {
         //given
         Cafekiosk cafekiosk = new Cafekiosk();
         Americano americano = new Americano();
+
         //when, then
         assertThatThrownBy(() -> cafekiosk.add(americano, 0))
                 .isInstanceOf(IllegalArgumentException.class)
