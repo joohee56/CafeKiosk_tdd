@@ -31,8 +31,8 @@ public class OrderService {
     private List<Product> findProductsBy(List<String> productNumbers) {
         List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);
         Map<String, Product> productMap = products.stream()
-
                 .collect(Collectors.toMap(Product::getProductNumber, p->p));
+
         List<Product> duplicateProducts = productNumbers.stream()
                 .map(productMap::get)
                 .collect(Collectors.toList());
