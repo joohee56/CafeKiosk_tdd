@@ -48,7 +48,7 @@ public class OrderService {
             Stock stock = stockMap.get(stockProductNumber);
             int quantity = productCountMap.get(stockProductNumber).intValue();
             if (stock.isQuantityLessThan(quantity)) {
-                throw new IllegalArgumentException("재고가 부족합니다.");
+                throw new IllegalArgumentException("재고가 부족한 상품이 있습니다.");
             }
             stock.deductQuantity(quantity);
         }
