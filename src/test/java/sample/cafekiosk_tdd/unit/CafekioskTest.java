@@ -5,6 +5,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import sample.cafekiosk_tdd.unit.beverages.Americano;
+import sample.cafekiosk_tdd.unit.beverages.Latte;
 
 class CafekioskTest {
 
@@ -38,5 +39,25 @@ class CafekioskTest {
         //then
         assertThat(cafekiosk.getBeverages()).isEmpty();
     }
+
+    @DisplayName("주문 목록을 전체 삭제한다.")
+    @Test
+    void clear() {
+        //given
+        Cafekiosk cafekiosk = new Cafekiosk();
+        Americano americano = new Americano();
+        Latte latte = new Latte();
+        cafekiosk.add(americano);
+        cafekiosk.add(latte);
+        assertThat(cafekiosk.getBeverages()).hasSize(2);
+
+        //when
+        cafekiosk.clear();
+
+        //then
+        assertThat(cafekiosk.getBeverages()).isEmpty();
+    }
+
+
 
 }
