@@ -1,5 +1,8 @@
 package sample.cafekiosk_tdd.unit.beverages;
 
+import lombok.Getter;
+
+@Getter
 public class Americano implements Beverage {
     @Override
     public String getName() {
