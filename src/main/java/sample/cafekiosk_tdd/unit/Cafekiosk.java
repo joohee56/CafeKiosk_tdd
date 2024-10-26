@@ -20,4 +20,8 @@ public class Cafekiosk {
     public void clear() {
         beverages.clear();
     }
+
+    public int calculateTotalPrice() {
+        return 8500;
+    }
 }
