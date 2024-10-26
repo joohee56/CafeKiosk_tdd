@@ -35,5 +35,4 @@ public class Cafekiosk {
                 .mapToInt(Beverage::getPrice)
                 .sum();
     }
-
 }
