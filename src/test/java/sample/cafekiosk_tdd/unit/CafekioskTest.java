@@ -60,7 +60,7 @@ class CafekioskTest {
 
     @DisplayName("주문 목록에서 총 금액을 조회한다.")
     @Test
-    void getTotalPrice() {
+    void calculateTotalPrice() {
         //given
         Cafekiosk cafekiosk = new Cafekiosk();
         Americano americano = new Americano();
