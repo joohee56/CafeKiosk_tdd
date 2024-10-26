@@ -39,7 +39,6 @@ class ProductRepositoryTest {
                         tuple("001", "아메리카노", SELLING),
                         tuple("002", "카페라떼", HOLD)
                 );
-
     }
 
     private Product createProduct(String productNumber, ProductSellingStatus sellingStatus, String name, int price) {
