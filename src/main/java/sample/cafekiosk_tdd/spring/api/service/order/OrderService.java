@@ -68,7 +68,6 @@ public class OrderService {
             }
             stock.deductQuantity(quantity);
         }
-
     }
 
     private List<String> extractStockProductNumbers(List<Product> products) {
