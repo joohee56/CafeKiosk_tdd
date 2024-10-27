@@ -10,6 +10,7 @@ import sample.cafekiosk_tdd.spring.domain.product.ProductType;
 @Getter
 @NoArgsConstructor
 public class ProductCreateRequest {
+
     private ProductType type;
     private ProductSellingStatus sellingStatus;
     private String name;
