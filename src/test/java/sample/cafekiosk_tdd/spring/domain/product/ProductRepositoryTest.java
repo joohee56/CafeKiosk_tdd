@@ -7,6 +7,7 @@ import static sample.cafekiosk_tdd.spring.domain.product.ProductSellingStatus.SE
 import static sample.cafekiosk_tdd.spring.domain.product.ProductSellingStatus.STOP_SELLING;
 
 import java.util.List;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,20 +74,20 @@ class ProductRepositoryTest {
         productRepository.saveAll(List.of(product1, product2, product3));
 
         //when
-        String latestProductNumber = productRepository.findLatestProductNumber();
+        Optional<String> latestProductNumber = productRepository.findLatestProductNumber();
 
         //then
-        assertThat(latestProductNumber).isEqualTo("003");
+        assertThat(latestProductNumber.get()).isEqualTo("003");
     }
 
     @DisplayName("가장 최근 저장한 상품번호를 조회할 때, 저장된 상품이 없을 경우 null을 반환한다.")
     @Test
     void findLatestProductNumberWithNoProduct() {
         //when
-        String latestProductNumber = productRepository.findLatestProductNumber();
+        Optional<String> latestProductNumber = productRepository.findLatestProductNumber();
 
         //then
-        assertThat(latestProductNumber).isNull();
+        assertThat(latestProductNumber).isEmpty();
     }
 
     private Product createProduct(String productNumber, ProductSellingStatus sellingStatus, String name, int price) {

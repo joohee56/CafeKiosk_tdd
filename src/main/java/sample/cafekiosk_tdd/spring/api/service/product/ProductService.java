@@ -1,9 +1,11 @@
 package sample.cafekiosk_tdd.spring.api.service.product;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import sample.cafekiosk_tdd.spring.api.controller.product.request.ProductCreateRequest;
 import sample.cafekiosk_tdd.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk_tdd.spring.domain.product.Product;
 import sample.cafekiosk_tdd.spring.domain.product.ProductRepository;
@@ -21,5 +23,19 @@ public class ProductService {
         return products.stream()
                 .map(ProductResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    public ProductResponse createProduct(ProductCreateRequest request) {
+        String productNumber = calculateNextProductNumber();
+        Product savedProduct = productRepository.save(request.toEntity(productNumber));
+        return ProductResponse.of(savedProduct);
+    }
+
+    private String calculateNextProductNumber() {
+        Optional<String> latestProductNumber = productRepository.findLatestProductNumber();
+        if (latestProductNumber.isEmpty()) {
+            return "001";
+        }
+        return String.format("%03d", Integer.parseInt(latestProductNumber.get())+1);
     }
 }
