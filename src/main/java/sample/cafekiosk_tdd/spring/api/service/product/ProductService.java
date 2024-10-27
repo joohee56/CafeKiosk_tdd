@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sample.cafekiosk_tdd.spring.api.controller.product.request.ProductCreateRequest;
 import sample.cafekiosk_tdd.spring.api.service.product.response.ProductResponse;
 import sample.cafekiosk_tdd.spring.domain.product.Product;
@@ -13,6 +14,7 @@ import sample.cafekiosk_tdd.spring.domain.product.ProductSellingStatus;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ProductService {
 
     private final ProductRepository productRepository;
@@ -25,6 +27,7 @@ public class ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public ProductResponse createProduct(ProductCreateRequest request) {
         String productNumber = calculateNextProductNumber();
         Product savedProduct = productRepository.save(request.toEntity(productNumber));
