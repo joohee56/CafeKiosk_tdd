@@ -63,6 +63,22 @@ class ProductRepositoryTest {
                 );
     }
 
+    @DisplayName("가장 최근 상품 번호를 조회한다.")
+    @Test
+    void findLatestProductNumber() {
+        //given
+        Product product1 = createProduct("001", SELLING, "아메리카노", 4000);
+        Product product2 = createProduct("002", HOLD, "카페라떼", 4500);
+        Product product3 = createProduct("003", STOP_SELLING, "팥빙수", 7000);
+        productRepository.saveAll(List.of(product1, product2, product3));
+
+        //when
+        String latestProductNumber = productRepository.findLatestProductNumber();
+
+        //then
+        assertThat(latestProductNumber).isEqualTo("003");
+    }
+
     private Product createProduct(String productNumber, ProductSellingStatus sellingStatus, String name, int price) {
         return Product.builder()
                 .productNumber(productNumber)
